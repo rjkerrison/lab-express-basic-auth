@@ -67,21 +67,21 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-// Verify 
+// Verify
 
-router.get('/verify', async (req,res,next) => {
-  const {authorization} = req.headers 
+router.get("/verify", async (req, res, next) => {
+  const { authorization } = req.headers;
 
-  const token = authorization.replace('Bearer ', '')
+  const token = authorization.replace("Bearer ", "");
 
   try {
-    const payload = jsonwebtoken.verify(token, process.env.TOKEN_SECRET)
+    const payload = jsonwebtoken.verify(token, process.env.TOKEN_SECRET);
 
-    res.json({token, payload})
-  } catch (err){
-    res.status(400).json ({message : 'Invalid token'})
-    next(err)
+    res.json({ token, payload });
+  } catch (err) {
+    res.status(400).json({ message: "Invalid token" });
+    next(err);
   }
-})
+});
 
 module.exports = router;
