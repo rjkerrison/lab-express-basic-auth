@@ -19,6 +19,7 @@ const index = require('./routes/index')
 app.use('/', index)
 
 app.use(`/`, require(`./routes/signup.route`));
+app.use(`/`, require(`./routes/protected.route`));
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app)
