@@ -5,12 +5,6 @@ const jsonwebtoken = require("jsonwebtoken");
 const router = require("express").Router();
 const saltRounds = 10;
 
-// router.get('/signup', async (req, res, next) => {
-//   const root = __dirname.replace('routes', '')
-//   console.log(root)
-//   res.sendFile('views/auth/signup.html', { root })
-// })
-
 router.post("/signup", async (req, res, next) => {
   try {
     const { username, password } = req.body;

@@ -18,6 +18,8 @@ require("./config")(app);
 const index = require("./routes/index");
 app.use("/", index);
 app.use("/auth", require("./routes/auth.routes"));
+app.use("/main", require("./routes/main.routes"));
+app.use("/private", require("./routes/private.routes"));
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
