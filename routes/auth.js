@@ -4,7 +4,15 @@ const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
 const User = require("../models/User.model");
 
-/* GET default route */
+/*
+  GET /signup
+  Show a signup form.
+  */
+router.get("/signup", async (req, res, next) => {
+  const root = __dirname.replace("routes", "");
+  console.log(root);
+  res.sendFile("views/auth/signup.html", { root });
+});
 
 /* POST default route */
 router.post("/signup", async (req, res, next) => {
