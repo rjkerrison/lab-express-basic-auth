@@ -10,6 +10,12 @@ router.post("/signup", async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
+    // Checking if username is an empty string
+    if (!username) {
+      res.status(400).json({ message: "Username cannot be empty" });
+      return
+    }
+
     //Checking if username already exist
     const isUsernameExists = await User.findOne({ username });
     if (isUsernameExists) {
