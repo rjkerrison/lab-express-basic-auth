@@ -14,6 +14,8 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most middlewares
 require("./config")(app);
 
+app.use(express.static('public'))
+
 // 👇 Start handling routes here
 app.use("/", require("./routes/index"));
 app.use("/auth", require("./routes/auth.routes"));

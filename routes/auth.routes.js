@@ -7,6 +7,7 @@ const saltRounds = 10;
 
 // SignUp route
 router.post("/signup", async (req, res, next) => {
+  console.log('called')
   try {
     const { username, password } = req.body;
 
@@ -32,7 +33,9 @@ router.post("/signup", async (req, res, next) => {
       username,
       password: hashedPassword,
     });
-    res.status(201).json({ createdUser });
+    // res.status(201).json({ createdUser });
+    const root = __dirname.replace('routes', '')
+    res.sendFile('public/login.html', {root})
 
     // Checking for errors
   } catch (error) {
