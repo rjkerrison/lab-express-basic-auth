@@ -59,13 +59,14 @@ router.get("/login", async (req, res, next) => {
 
     const playload = { username };
 
+    // Create auth token
     const authToken = jsonwebtoken.sign(playload, process.env.TOKEN_SECRET, {
       algorithm: "HS256",
-      expiresIn: "30m",
+      expiresIn: "30s",
     });
 
     // Connect user
-    res.status(200).json({ message: `You're connected` });
+    res.status(200).json({ isLoggedIn: true, authToken });
 
     // Check for errors
   } catch (error) {
@@ -74,13 +75,20 @@ router.get("/login", async (req, res, next) => {
   }
 });
 
-router.get("./verify", async (req, res, next) => {
+router.get("/verify", async (req, res, next) => {
+  // Get the bearer token from the header
   const { authorization } = req.headers;
+  // extract the jwt
   const token = authorization.replace("Bearer ", "");
 
   try {
-    const playload = jsonwebtoken.sign(token, process.env.TOKEN_SECRET);
-    console.log(playload);
+    // verify the web token
+    const playload = jsonwebtoken.verify(token, process.env.TOKEN_SECRET);
+    console.log({ playload });
+    // send the user the payload
+    res.json({ token, playload });
+
+    // if error, catch it and say token is invalid
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: "Invalid token" });

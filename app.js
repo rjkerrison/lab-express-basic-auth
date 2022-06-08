@@ -17,6 +17,7 @@ require("./config")(app);
 // 👇 Start handling routes here
 app.use("/", require("./routes/index"));
 app.use("/auth", require("./routes/auth.routes"));
+app.use("/others", require("./routes/others.routes"));
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
